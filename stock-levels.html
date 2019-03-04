@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	%include('shared/head.html')
+	%include('shared/navBar.html')
+	
+	
+  <div class="row">
+		%for comic in stock_list:
+			<div class="col s12 m2">
+				<div class="card blue darken-0">
+					<div class="card-content white-text">
+						<span class="card-title">{{comic.title}}</span>
+						<p>Books in sock: {{comic.stock}}</p>
+						<p>Sold Books: {{comic.sold}}</p>
+					</div>
+					<div class="card-action">
+						<a href="#">Sell book</a>
+						<a href="#">Re-Stock book</a>
+					</div>
+				</div>
+			</div>
+		%end
+  </div>  
+	
+	
+
+
+</html>
