@@ -34,6 +34,20 @@ def index():
 def stock_levels():
     data = dict (stock_list = comics)
     return data
+#add sell-book-success
+
+
+@route('/sell-book')
+@view('sell-book')
+def sell_book(ticket):
+    pass #add stuff
+    
+    
+    
+
+
+
+
 
 
 run(host='0.0.0.0', port = 8080, reloader = True, debug = True)
