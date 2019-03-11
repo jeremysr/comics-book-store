@@ -15,9 +15,9 @@ class Comic:
         
         
 comics = [
-    Comic("Water Woman","3","0"),
-    Comic("Lizard Man","12","0"),
-    Comic("Super Dude","8","0"),
+    Comic("Water Woman",3,0),
+    Comic("Lizard Man",12,0),
+    Comic("Super Dude",8,0),
 ]
 
 
@@ -34,16 +34,29 @@ def index():
 def stock_levels():
     data = dict (stock_list = comics)
     return data
+
+
 #add sell-book-success
 
 
-@route('/sell-book')
-@view('sell-book')
-def sell_book(ticket):
-    pass #add stuff
-    
-    
-    
+@route('/sell-book-success/<comic_id>')
+@view('sell-book-success')
+def sell_book_success(comic_id):
+    comic_id = int(comic_id)
+    found_book = None
+    for comic in comics:
+        if comic.id == comic_id:
+            found_book = comic
+    data = dict (comic = found_book)
+    if found_book.stock == 0 or found_book.stock == "OUT OF STOCK":
+        found_book.stock = ("OUT OF STOCK")
+    else:
+        found_book.stock = found_book.stock - 1
+        found_book.sold = found_book.sold + 1
+    return data
+
+
+
 
 
 
