@@ -36,7 +36,10 @@ def stock_levels():
     return data
 
 
-#add sell-book-success
+@route('/stock-book/<comic_id>')
+@view('stock-book')
+def stock_book(comic_id):
+    pass
 
 
 @route('/sell-book-success/<comic_id>')
