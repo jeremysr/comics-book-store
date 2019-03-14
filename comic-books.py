@@ -41,6 +41,11 @@ def stock_levels():
 def stock_book(comic_id):
     pass
 
+@route('/stock-book-success', method = "post")
+@view('stock-book-success')
+def stock_book_success():
+    re_stock = request.forms.get('re_stock')
+    
 
 @route('/sell-book-success/<comic_id>')
 @view('sell-book-success')
