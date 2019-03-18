@@ -39,13 +39,28 @@ def stock_levels():
 @route('/stock-book/<comic_id>')
 @view('stock-book')
 def stock_book(comic_id):
-    pass
+    comic_id = int(comic_id)
+    found_book = None
+    for comic in comics:
+        if comic.id == comic_id:
+            found_book = comic
+    data = dict (comic = found_book)
+    return data
 
-@route('/stock-book-success', method = "post")
+@route('/stock-book-success/<comic_id>', method = "POST")
 @view('stock-book-success')
-def stock_book_success():
-    re_stock = request.forms.get('re_stock')
-    
+def stock_book_success(comic_id):
+    comic_id = int(comic_id)
+    restock = request.forms.get('inp_re_stock')
+    print(restock)
+    resto=int(restock)
+    found_book = None
+    for comic in comics:
+        if comic.id == comic_id:
+            found_book = comic
+        data = dict (comic = found_book)
+    found_book.stock = found_book.stock + resto
+    return data
 
 @route('/sell-book-success/<comic_id>')
 @view('sell-book-success')
