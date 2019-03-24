@@ -59,6 +59,8 @@ def stock_book_success(comic_id):
         if comic.id == comic_id:
             found_book = comic
         data = dict (comic = found_book)
+    if found_book.stock == "OUT OF STOCK":
+        found_book.stock = 0
     found_book.stock = found_book.stock + resto
     return data
 

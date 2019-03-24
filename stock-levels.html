@@ -14,9 +14,12 @@
 						<p>Sold Books: {{comic.sold}}</p>
 					</div>
 					<div class="card-action">
-						<a href="/sell-book-success/{{comic.id}}">Sell book</a>
-						<a href="/stock-book/{{comic.id}}">Re-Stock book</a>
+						<a href="/sell-book-success/{{comic.id}}"><i class="material-icons left">attach_money</i>Sell book</a>
 					</div>
+					<div class="card-action">
+						<a href="/stock-book/{{comic.id}}"><i class="material-icons left">file_download</i>Re-Stock book</a>
+					</div>
+					
 				</div>
 			</div>
 		%end
