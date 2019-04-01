@@ -52,8 +52,11 @@ def stock_book(comic_id):
 def stock_book_success(comic_id):
     comic_id = int(comic_id)
     restock = request.forms.get('inp_re_stock')
-    print(restock)
-    resto=int(restock)
+    try:
+        resto = int(restock)
+    except ValueError:
+        resto = 0
+    
     found_book = None
     for comic in comics:
         if comic.id == comic_id:
