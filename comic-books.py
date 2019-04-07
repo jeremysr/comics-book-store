@@ -15,9 +15,9 @@ class Comic:
         
         
 comics = [
-    Comic("Water Woman","3","0"),
-    Comic("Lizard Man","12","0"),
-    Comic("Super Dude","8","0"),
+    Comic("Water Woman",3,0),
+    Comic("Lizard Man",12,0),
+    Comic("Super Dude",8,0),
 ]
 
 
@@ -34,6 +34,61 @@ def index():
 def stock_levels():
     data = dict (stock_list = comics)
     return data
+
+
+@route('/stock-book/<comic_id>')
+@view('stock-book')
+def stock_book(comic_id):
+    comic_id = int(comic_id)
+    found_book = None
+    for comic in comics:
+        if comic.id == comic_id:
+            found_book = comic
+    data = dict (comic = found_book)
+    return data
+
+@route('/stock-book-success/<comic_id>', method = "POST")
+@view('stock-book-success')
+def stock_book_success(comic_id):
+    comic_id = int(comic_id)
+    restock = request.forms.get('inp_re_stock')
+    try:
+        resto = int(restock)
+    except ValueError:
+        resto = 0
+    
+    found_book = None
+    for comic in comics:
+        if comic.id == comic_id:
+            found_book = comic
+        data = dict (comic = found_book)
+    if found_book.stock == "OUT OF STOCK":
+        found_book.stock = 0
+    found_book.stock = found_book.stock + resto
+    return data
+
+@route('/sell-book-success/<comic_id>')
+@view('sell-book-success')
+def sell_book_success(comic_id):
+    comic_id = int(comic_id)
+    found_book = None
+    for comic in comics:
+        if comic.id == comic_id:
+            found_book = comic
+    data = dict (comic = found_book)
+    if found_book.stock == 0 or found_book.stock == "OUT OF STOCK":
+        found_book.stock = ("OUT OF STOCK")
+    else:
+        found_book.stock = found_book.stock - 1
+        found_book.sold = found_book.sold + 1
+    return data
+
+
+
+
+
+
+
 
 
 run(host='0.0.0.0', port = 8080, reloader = True, debug = True)
